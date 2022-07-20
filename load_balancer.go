@@ -134,14 +134,10 @@ func isBackendAlive(u *url.URL) bool {
 }
 
 func healthCheck() {
-	t := time.NewTicker(time.Minute * 2)
-	for {
-		select {
-		case <-t.C:
-			log.Println("Starting health check...")
-			serverPool.HealthCheck()
-			log.Println("Health check completed")
-		}
+	for range time.Tick(time.Minute) {
+		log.Println("Starting health check...")
+		serverPool.HealthCheck()
+		log.Println("Health check completed")
 	}
 }
 
