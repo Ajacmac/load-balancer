@@ -141,17 +141,7 @@ func healthCheck() {
 	}
 }
 
-func main() {
-	var serverList string
-	var port int
-	flag.StringVar(&serverList, "backends", "", "Load balanced backends, use commas to separate")
-	flag.IntVar(&port, "port", 3030, "Port to serve")
-	flag.Parse()
-
-	if len(serverList) == 0 {
-		log.Fatal("Please provide one or more backends to load balance")
-	}
-
+func setupBackends(serverList string) {
 	tokens := strings.Split(serverList, ",")
 	for _, tok := range tokens {
 		serverUrl, err := url.Parse(tok)
@@ -187,6 +177,20 @@ func main() {
 		})
 		log.Printf("Configured server: %s\n", serverUrl)
 	}
+}
+
+func main() {
+	var serverList string
+	var port int
+	flag.StringVar(&serverList, "backends", "", "Load balanced backends, use commas to separate")
+	flag.IntVar(&port, "port", 3030, "Port to serve")
+	flag.Parse()
+
+	if len(serverList) == 0 {
+		log.Fatal("Please provide one or more backends to load balance")
+	}
+
+	setupBackends(serverList)
 
 	server := http.Server{
 		Addr:    fmt.Sprintf(":%d", port),
