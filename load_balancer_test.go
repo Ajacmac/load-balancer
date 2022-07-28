@@ -11,6 +11,7 @@ import (
 
 // add subtests, maybe 10 per type, for each step
 // How do I keep breaking out the functionality to make it more testable?
+// Revisit this tomorrow. I waited way too long.
 
 func Test_setupBackends(t *testing.T) {
 	type args struct {
