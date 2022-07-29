@@ -259,6 +259,8 @@ func TestBackend_IsAlive(t *testing.T) {
 		wantAlive bool
 	}{
 		// TODO: Add test cases.
+
+		// think about how I should verify that a check works. is there really anything this needs to do?
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
