@@ -291,6 +291,8 @@ func TestBackend_SetAlive(t *testing.T) {
 		args   args
 	}{
 		// TODO: Add test cases.
+
+		// Add simple test to verify that once it's supposed to be set...it's actually set
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
