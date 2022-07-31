@@ -247,34 +247,20 @@ func TestServerPool_AddBackend(t *testing.T) {
 }
 
 func TestBackend_IsAlive(t *testing.T) {
-	type fields struct {
-		URL          *url.URL
-		Alive        bool
-		mux          sync.RWMutex
-		ReverseProxy *httputil.ReverseProxy
+	url, _ := url.Parse("www.google.com")
+	b := Backend{
+		URL:   url,
+		Alive: true,
 	}
-	tests := []struct {
-		name      string
-		fields    fields
-		wantAlive bool
-	}{
-		// TODO: Add test cases.
+	if b.Alive != b.IsAlive() {
+		t.Error("b.IsAlive() returns false when it should return true!")
+	}
 
-		// think about how I should verify that a check works. is there really anything this needs to do?
+	b.Alive = false
+	if b.Alive != b.IsAlive() {
+		t.Error("b.IsAlive() returns true when it should return false!")
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			b := &Backend{
-				URL:          tt.fields.URL,
-				Alive:        tt.fields.Alive,
-				mux:          tt.fields.mux,
-				ReverseProxy: tt.fields.ReverseProxy,
-			}
-			if gotAlive := b.IsAlive(); gotAlive != tt.wantAlive {
-				t.Errorf("Backend.IsAlive() = %v, want %v", gotAlive, tt.wantAlive)
-			}
-		})
-	}
+
 }
 
 func TestBackend_SetAlive(t *testing.T) {
