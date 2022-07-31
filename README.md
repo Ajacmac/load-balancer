@@ -11,6 +11,18 @@ instead of just responding to a ping
 
 config file should include a request to use to see if
 the server is responding
+- setup default tcp request using this or similar 
+
+    host := "example.com"
+    port := "80"
+    timeout := time.Duration(1 * time.Second)
+    _, err := net.DialTimeout("tcp", host+":"+port, timeout)
+    if err != nil {
+        fmt.Printf("%s %s %s\n", host, "not responding", err.Error())
+    } else {
+        fmt.Printf("%s %s %s\n", host, "responding on port:", port)
+    }
+    
 - time how long it takes to respond and log that
 - prioritize faster backends instead of round robin?
 - any point in being able to parse api spec to automatically determine endpoint to check with?

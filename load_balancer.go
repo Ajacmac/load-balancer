@@ -13,6 +13,8 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/kylelemons/go-gypsy/yaml"
 )
 
 const (
@@ -25,6 +27,10 @@ type Backend struct {
 	Alive        bool
 	mux          sync.RWMutex
 	ReverseProxy *httputil.ReverseProxy
+}
+
+type Config struct {
+	Backends []string
 }
 
 // is there a way I can get rid of these mutexes?
@@ -177,6 +183,16 @@ func setupBackends(serverList string) {
 		})
 		log.Printf("Configured server: %s\n", serverUrl)
 	}
+}
+
+func getConfig() Config {
+	configFile := flag.String("configFile", "config.yaml", "the configuraton file")
+	configYaml, err := yaml.ReadFile(*configFile)
+	if err != nil {
+		log.Fatalf("readfile(%q): %s", *configFile, err)
+	}
+
+	return config
 }
 
 func main() {
