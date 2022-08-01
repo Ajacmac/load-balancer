@@ -14,7 +14,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/kylelemons/go-gypsy/yaml"
+	"github.com/spf13/viper"
 )
 
 const (
@@ -186,10 +186,14 @@ func setupBackends(serverList string) {
 }
 
 func getConfig() Config {
-	configFile := flag.String("configFile", "config.yaml", "the configuraton file")
-	configYaml, err := yaml.ReadFile(*configFile)
-	if err != nil {
-		log.Fatalf("readfile(%q): %s", *configFile, err)
+	viper.SetConfigFile("config.yaml")
+	viper.ReadInConfig()
+
+	item := viper.Get("Backends") // FIXME: can't parse this yet
+	fmt.Printf("config: %v \n", item)
+
+	config := Config{
+		Backends: []string{"www.google.com"},
 	}
 
 	return config
@@ -198,13 +202,16 @@ func getConfig() Config {
 func main() {
 	var serverList string
 	var port int
+
+	getConfig()
+
 	flag.StringVar(&serverList, "backends", "", "Load balanced backends, use commas to separate")
 	flag.IntVar(&port, "port", 3030, "Port to serve")
 	flag.Parse()
 
-	if len(serverList) == 0 {
-		log.Fatal("Please provide one or more backends to load balance")
-	}
+	// if len(serverList) == 0 {
+	// 	log.Fatal("Please provide one or more backends to load balance")
+	// }
 
 	setupBackends(serverList)
 
