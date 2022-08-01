@@ -1,4 +1,5 @@
-Backends
----
-
-Backends: 
+Backends:
+  - url: www.google.com
+    request: default
+  - url: www.youtube.com
+    request: default
