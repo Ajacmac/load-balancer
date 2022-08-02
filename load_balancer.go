@@ -184,11 +184,27 @@ func setupBackends(serverList string) {
 }
 
 func getConfig() Config {
+	/*
+		currently:
+			url parses as nil
+			alive is set to false
+			mutex gets printed as {{0 0} 0 0 0 0} and I don't even know what that means
+			the *httputil.ReverseProxy is nil
+
+		how do I construct these so I can test them?
+		...how do I test them?
+
+		should I just make a tiny, sinle function backend to spin up in a couple containers for testing? (yes)
+	*/
 	viper.SetConfigFile("config.yaml")
 	viper.ReadInConfig()
 
-	item := viper.Get("Backends") // FIXME: can't parse this yet
-	fmt.Printf("config: %v \n", item)
+	var backends []Backend
+	viper.UnmarshalKey("Backends", &backends)
+
+	for _, backend := range backends {
+		fmt.Printf("config: %v \n", backend)
+	}
 
 	config := Config{
 		Backends: []string{"www.google.com"},

@@ -1,5 +1,5 @@
 Backends:
-  - url: www.google.com
+  - url: "www.google.com"
     request: default
-  - url: www.youtube.com
+  - url: "www.youtube.com"
     request: default
