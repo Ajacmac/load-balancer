@@ -160,11 +160,9 @@ func setupBackends(serverList string) {
 			log.Printf("[%s] %s\n", serverUrl.Host, e.Error())
 			retries := GetRetryFromContext(request)
 			if retries < 3 {
-				select { //fix this?
-				case <-time.After(10 * time.Millisecond):
-					ctx := context.WithValue(request.Context(), Retry, retries+1) // custom type?
-					proxy.ServeHTTP(writer, request.WithContext(ctx))
-				}
+				<-time.After(10 * time.Millisecond)
+				ctx := context.WithValue(request.Context(), Retry, retries+1) // custom type?
+				proxy.ServeHTTP(writer, request.WithContext(ctx))
 				return
 			}
 
