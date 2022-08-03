@@ -1,5 +1,11 @@
-Backends:
-  - url: "www.google.com"
-    request: default
-  - url: "www.youtube.com"
-    request: default
+Backends: 
+  - {
+      url: "www.google.com",
+      useDefaultRequest: true,
+      request: ""
+    } 
+  - {
+      url: "www.youtube.com",
+      useDefaultRequest: true, 
+      request: ""
+    }

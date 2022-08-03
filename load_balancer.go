@@ -199,11 +199,20 @@ func getConfig() Config {
 	viper.SetConfigFile("config.yaml")
 	viper.ReadInConfig()
 
-	var backends []Backend
-	viper.UnmarshalKey("Backends", &backends)
+	type BackendConfig struct {
+		url           string
+		useDefaultReq bool
+		request       string
+	}
 
-	for _, backend := range backends {
-		fmt.Printf("config: %v \n", backend)
+	var backendConfig []BackendConfig
+	viper.UnmarshalKey("Backends", &backendConfig)
+
+	for _, backend := range backendConfig {
+		fmt.Printf("backend: %v \n", backend)
+		fmt.Println(backend.url)
+		fmt.Println(backend.useDefaultReq)
+		fmt.Println(backend.request)
 	}
 
 	config := Config{
