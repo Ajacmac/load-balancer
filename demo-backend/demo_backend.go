@@ -1,4 +1,4 @@
-package demo_backend
+package main
 
 import (
 	"fmt"
@@ -18,13 +18,9 @@ func main() {
 
 /*
 	TODO:
-	-setup basic static file server
 	-make docker image
-	-setup docket containers
+	-setup docker containers
 	-setup test function to invoke the docker containers
-	-have test function create the index.html file for each container,
-	each html file only containing a number for identifying which backend responded
-
-	-test demo server to ensure it works
+	-have test function concatenate the index to the index.html file for each container
 
 */
