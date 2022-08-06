@@ -194,7 +194,7 @@ func getConfig() Config {
 		how do I construct these so I can test them?
 		...how do I test them?
 
-		should I just make a tiny, sinle function backend to spin up in a couple containers for testing? (yes)
+		should I just make a tiny, single function backend to spin up in a couple containers for testing? (yes)
 	*/
 	viper.SetConfigFile("config.yaml")
 	viper.ReadInConfig()
