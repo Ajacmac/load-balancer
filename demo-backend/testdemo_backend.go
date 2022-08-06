@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func test_server(t *testing.T) {
+func Test_server(t *testing.T) {
 	/*
 		docker command to start server
 		ignition := exec.Command("put docer invocation nonsense here")
