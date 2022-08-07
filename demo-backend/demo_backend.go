@@ -23,4 +23,5 @@ func main() {
 	-setup test function to invoke the docker containers
 	-have test function concatenate the index to the index.html file for each container
 
+	-switch over fileserver to simpler demo in my lern repo
 */
