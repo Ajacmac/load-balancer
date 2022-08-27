@@ -13,6 +13,10 @@ import (
 // How do I keep breaking out the functionality to make it more testable?
 // Revisit this tomorrow. I waited way too long.
 
+func Test_the_test_infra(t *testing.T) {
+	os.exec // FIXME: find the command to put here to run the docker compose command
+}
+
 func Test_setupBackends(t *testing.T) {
 	type args struct {
 		serverList string
