@@ -6,4 +6,4 @@ COPY * /backend/
 
 RUN go build .
 
-CMD ["./init.sh"]
+CMD ["go", "run", "."]

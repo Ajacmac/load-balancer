@@ -4,17 +4,30 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os/exec"
 	"reflect"
 	"sync"
 	"testing"
 )
 
-// add subtests, maybe 10 per type, for each step
-// How do I keep breaking out the functionality to make it more testable?
-// Revisit this tomorrow. I waited way too long.
+/*
+	TODO:
+	- figure out what the order of operations needs to be for managing docker-compose
+		- do I need to run a separate terminal with exec.Command to then run the command in?
+		- explanation in overview here https://pkg.go.dev/os/exec
+	- figure out how to change directory differently depending on os
 
-func Test_the_test_infra(t *testing.T) {
-	os.exec // FIXME: find the command to put here to run the docker compose command
+	- add subtests, maybe 10 per type, for each step
+	- How do I keep breaking out the functionality to make it more testable?
+*/
+
+func infraUP() {
+
+	exec.Command("ls") // FIXME: find the command to put here to run the docker compose command
+}
+
+func infraDown() {
+	exec.Command("docker-compose down")
 }
 
 func Test_setupBackends(t *testing.T) {
