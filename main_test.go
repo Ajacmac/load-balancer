@@ -12,25 +12,23 @@ import (
 
 /*
 	TODO:
-	- figure out what the order of operations needs to be for managing docker-compose
-		- do I need to run a separate terminal with exec.Command to then run the command in?
-		- explanation in overview here https://pkg.go.dev/os/exec
-	- figure out how to change directory differently depending on os
+	- verify these infra functions work as expected
 
 	- add subtests, maybe 10 per type, for each step
 	- How do I keep breaking out the functionality to make it more testable?
 */
 
 func infraUP() {
-
-	exec.Command("ls") // FIXME: find the command to put here to run the docker compose command
+	exec.Command(Shell, Subdir_cd, "demo-backend", Cmd_delim, "docker-compose up")
 }
 
 func infraDown() {
-	exec.Command("docker-compose down")
+	exec.Command(Shell, Subdir_cd, "demo-backend", Cmd_delim, "docker-compose down")
 }
 
 func Test_setupBackends(t *testing.T) {
+	InfraUp()
+
 	type args struct {
 		serverList string
 	}
